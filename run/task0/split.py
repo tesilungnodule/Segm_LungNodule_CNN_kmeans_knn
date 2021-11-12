@@ -1,6 +1,9 @@
 import argparse
 import os
 import shutil
+import sys
+print(sys.path.append("/content/Segm_LungNodule_CNN_kmeans_knn"))
+
 from config.paths import base_dataset_dir
 
 path_to_original_images_ = "original_training"
@@ -46,6 +49,7 @@ def run(path_to_original_images, path_to_original_labels,
             source_image = os.path.join(path_to_original_images, trainval_image)
             destination_image = os.path.join(path_to_validation_images, trainval_image)
             shutil.move(source_image, destination_image)
+            print("moving {}".format(destination_image))
 
             source_label = os.path.join(path_to_original_labels, trainval_label)
             destination_label = os.path.join(path_to_validation_labels, trainval_label)
