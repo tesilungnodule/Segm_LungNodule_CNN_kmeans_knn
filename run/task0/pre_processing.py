@@ -1,6 +1,8 @@
 import itk
 import os
 import numpy as np
+import sys
+print(sys.path.append("/content/Segm_LungNodule_CNN_kmeans_knn"))
 from config.paths import base_dataset_dir
 
 
