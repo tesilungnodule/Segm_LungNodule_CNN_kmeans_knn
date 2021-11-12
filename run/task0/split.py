@@ -33,17 +33,16 @@ def run(path_to_original_images, path_to_original_labels,
 
     trainval_images = os.listdir(path_to_original_images)
     trainval_labels = os.listdir(path_to_original_labels)
-    print(trainval_images)
+
     trainval_images.sort()
     trainval_labels.sort()
-
-    print(trainval_images)
 
     cnt_val = 0
 
     for trainval_image, trainval_label in zip(trainval_images, trainval_labels):
         is_val_i = trainval_image in validation_images
         is_val_l = trainval_label in validation_labels
+        print("{} {} {}{}".format(trainval_image,is_val_i, trainval_label, is_val_l))
         assert is_val_i == is_val_l, "Mismatch between validation image and label! {} and {}".format(trainval_image, trainval_label)
 
         if is_val_i:
