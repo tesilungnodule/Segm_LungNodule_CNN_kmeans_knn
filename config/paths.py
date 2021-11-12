@@ -1,5 +1,7 @@
 import os
 import sys
+print(sys.path.append("/content/Segm_LungNodule_CNN_kmeans_knn"))
+from run.utils import deleteHiddenFilesFromList
 
 logs_folder = "logs"
 os.makedirs(logs_folder, exist_ok=True)
@@ -17,10 +19,10 @@ original_train_images_folder = os.path.join(base_dataset_dir, "original_training
 original_train_labels_folder = os.path.join(base_dataset_dir, "original_training_mask")
 train_prediction_folder = os.path.join(base_dataset_dir, "predTr")
 multiclass_prediction_folder = os.path.join(base_dataset_dir, "predMulticlass")
-train_images = os.listdir(train_images_folder)
-train_labels = os.listdir(train_labels_folder)
-original_train_images = os.listdir(original_train_images_folder)
-original_train_labels = os.listdir(original_train_labels_folder)
+train_images = deleteHiddenFilesFromList(os.listdir(train_images_folder))
+train_labels = deleteHiddenFilesFromList(os.listdir(train_labels_folder))
+original_train_images = deleteHiddenFilesFromList(os.listdir(original_train_images_folder))
+original_train_labels = deleteHiddenFilesFromList(os.listdir(original_train_labels_folder))
 
 train_images = [train_image for train_image in train_images
                 if train_image.endswith(".nii.gz") and not train_image.startswith('.')]
@@ -33,7 +35,7 @@ original_train_labels = [train_label for train_label in original_train_labels
 
 test_images_folder = os.path.join(base_dataset_dir, "validation")
 os.makedirs(test_images_folder, exist_ok=True)
-test_images = os.listdir(test_images_folder)
+test_images = deleteHiddenFilesFromList(os.listdir(test_images_folder))
 test_prediction_folder = os.path.join(base_dataset_dir, "predTs")
 
 test_images = [test_image for test_image in test_images

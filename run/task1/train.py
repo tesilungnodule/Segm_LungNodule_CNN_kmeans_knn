@@ -3,6 +3,9 @@ import os
 import torch
 import torch.optim as optim
 
+import sys
+print(sys.path.append("/content/Segm_LungNodule_CNN_kmeans_knn"))
+
 from config.config_semseg import SemSegMRIConfig
 from models.vnet3d import VNet3D
 from config.paths import logs_folder
