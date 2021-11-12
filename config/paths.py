@@ -6,7 +6,7 @@ os.makedirs(logs_folder, exist_ok=True)
 current_path_abs = os.path.abspath('.')
 sys.path.append(current_path_abs)
 
-base_dataset_dir = 'F:\\Dataset\\Verse'
+base_dataset_dir = '/content/drive/MyDrive/Task10_FGof5_vNET_V'
 train_images_folder = os.path.join(base_dataset_dir, "training")
 train_labels_folder = os.path.join(base_dataset_dir, "training_mask")
 
