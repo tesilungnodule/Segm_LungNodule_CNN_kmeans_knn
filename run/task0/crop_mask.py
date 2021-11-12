@@ -126,7 +126,7 @@ if __name__ == '__main__':
     parser.add_argument(
         "-otl",
         "--original-training-labels",
-        default=path_to_original_images_, type=str,
+        default=path_to_original_labels_, type=str,
         help="Specify the path where there are the original labels"
     )
     parser.add_argument(
