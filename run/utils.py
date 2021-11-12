@@ -8,9 +8,9 @@ import SimpleITK as sitk
 from models.vnet3d import VNet3D
 from semseg.data_loader import QueueDataLoaderTraining
 
-def deleteHiddenFilesFromList(fileList){
+def deleteHiddenFilesFromList(fileList):
     return [x for x in fileList if not x.startswith(".")]
-}
+
 
 
 def print_config(config):
