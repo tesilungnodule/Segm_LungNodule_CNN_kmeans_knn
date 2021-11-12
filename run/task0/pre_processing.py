@@ -4,7 +4,7 @@ import numpy as np
 import sys
 print(sys.path.append("/content/Segm_LungNodule_CNN_kmeans_knn"))
 from config.paths import base_dataset_dir
-
+from run.utils import deleteHiddenFilesFromList
 
 def reorient_to_rai(image):
     """
@@ -113,8 +113,8 @@ def process_image(filename, input_folder, output_folder, sigma):
 
 
 def run(input_image_folder, input_mask_folder, output_image_folder, output_mask_folder, output_mask_folder_bin):
-    filename_images = os.listdir(input_image_folder)
-    filename_masks = os.listdir(input_mask_folder)
+    filename_images = deleteHiddenFilesFromList(os.listdir(input_image_folder))
+    filename_masks = deleteHiddenFilesFromList(os.listdir(input_mask_folder))
     for filename_image, filename_mask in zip(filename_images, filename_masks):
         print('Image ' + filename_image + ' in processing...')
         process_image(filename_image, input_image_folder, output_image_folder, 0.75)
@@ -122,7 +122,7 @@ def run(input_image_folder, input_mask_folder, output_image_folder, output_mask_
         print('Mask  ' + filename_mask + ' in processing...')
         process_image(filename_mask, input_mask_folder, output_mask_folder, 0.75)
         print('Mask  ' + filename_mask + ' processed')
-    labels_colored = os.listdir(output_mask_folder)
+    labels_colored = deleteHiddenFilesFromList(os.listdir(output_mask_folder))
     os.makedirs(output_mask_folder_bin, exist_ok=True)
     for label_colored in labels_colored:
         path_to_label = os.path.join(output_mask_folder, label_colored)
