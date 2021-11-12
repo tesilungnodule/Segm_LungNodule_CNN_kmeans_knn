@@ -3,7 +3,7 @@ import os
 import shutil
 import sys
 print(sys.path.append("/content/Segm_LungNodule_CNN_kmeans_knn"))
-
+from run.utils import deleteHiddenFilesFromList
 from config.paths import base_dataset_dir
 
 path_to_original_images_ = "original_training"
@@ -20,8 +20,8 @@ def run(path_to_original_images, path_to_original_labels,
     path_to_validation_images = os.path.join(base_dataset_dir, path_to_validation_images)
     path_to_validation_labels = os.path.join(base_dataset_dir, path_to_validation_labels)
 
-    original_length = len(os.listdir(path_to_original_images))
-    original_length_l = len(os.listdir(path_to_original_labels))
+    original_length = len(deleteHiddenFilesFromList(os.listdir(path_to_original_images)))
+    original_length_l = len(deleteHiddenFilesFromList(os.listdir(path_to_original_labels)))
 
     os.makedirs(path_to_validation_images, exist_ok=True)
     os.makedirs(path_to_validation_labels, exist_ok=True)
@@ -31,8 +31,8 @@ def run(path_to_original_images, path_to_original_labels,
 
     assert len(validation_images) == len(validation_labels), "Mismatch in sizes between validation images and labels"
 
-    trainval_images = os.listdir(path_to_original_images)
-    trainval_labels = os.listdir(path_to_original_labels)
+    trainval_images = deleteHiddenFilesFromList(os.listdir(path_to_original_images))
+    trainval_labels = deleteHiddenFilesFromList(os.listdir(path_to_original_labels))
 
     trainval_images.sort()
     trainval_labels.sort()
@@ -61,13 +61,13 @@ def run(path_to_original_images, path_to_original_labels,
     print("Validation L = ", len(validation_labels))
     assert cnt_val == len(validation_images) == len(validation_labels), "Mismatch in size between cnt_val and validation set"
 
-    train_len_i = len(os.listdir(path_to_original_images))
-    val_len_i = len(os.listdir(path_to_validation_images))
+    train_len_i = len(deleteHiddenFilesFromList(os.listdir(path_to_original_images)))
+    val_len_i = len(deleteHiddenFilesFromList(os.listdir(path_to_validation_images)))
 
     assert train_len_i + val_len_i == original_length, "Mismatch after train-val split"
 
-    train_len_l = len(os.listdir(path_to_original_labels))
-    val_len_l = len(os.listdir(path_to_validation_labels))
+    train_len_l = len(deleteHiddenFilesFromList(os.listdir(path_to_original_labels)))
+    val_len_l = len(deleteHiddenFilesFromList(os.listdir(path_to_validation_labels)))
 
     assert train_len_l + val_len_l == original_length_l, "Mismatch in labels after train-val split"
 
