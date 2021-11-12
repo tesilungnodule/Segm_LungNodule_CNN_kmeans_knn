@@ -33,9 +33,11 @@ def run(path_to_original_images, path_to_original_labels,
 
     trainval_images = os.listdir(path_to_original_images)
     trainval_labels = os.listdir(path_to_original_labels)
-
+    print(trainval_images)
     trainval_images.sort()
     trainval_labels.sort()
+
+ 
 
     cnt_val = 0
 
