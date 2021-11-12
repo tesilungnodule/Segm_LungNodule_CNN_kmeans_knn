@@ -1,5 +1,8 @@
 import os
 import argparse
+import sys
+print(sys.path.append("/content/Segm_LungNodule_CNN_kmeans_knn"))
+from run.utils import deleteHiddenFilesFromList
 import SimpleITK as sitk
 from skimage import measure
 import numpy as np
