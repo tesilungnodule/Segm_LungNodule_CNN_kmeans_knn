@@ -37,7 +37,7 @@ def run(path_to_original_images, path_to_original_labels,
     trainval_images.sort()
     trainval_labels.sort()
 
- 
+    print(trainval_images)
 
     cnt_val = 0
 
