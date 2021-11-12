@@ -76,7 +76,7 @@ def crop_image_folder(images_folder, labels_folder, images_folder_save, labels_f
     os.makedirs(images_folder_save, exist_ok=True)
     os.makedirs(labels_folder_save, exist_ok=True)
 
-    for msk in os.listdir(labels_folder):
+    for msk in deleteHiddenFilesFromList(os.listdir(labels_folder)):
         name = msk[:-19]
         image = os.path.join(images_folder, name + 'ct.nii.gz')
         mask = os.path.join(labels_folder, msk)
