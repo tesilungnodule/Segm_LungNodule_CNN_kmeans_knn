@@ -3,7 +3,7 @@ import sys
 print(sys.path.append("/content/Segm_LungNodule_CNN_kmeans_knn"))
 from run.utils import deleteHiddenFilesFromList
 
-logs_folder = "logs"
+logs_folder = "/content/drive/MyDrive/Task10_FGof5_vNET_V/logs"
 os.makedirs(logs_folder, exist_ok=True)
 current_path_abs = os.path.abspath('.')
 sys.path.append(current_path_abs)
