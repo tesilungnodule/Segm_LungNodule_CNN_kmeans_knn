@@ -26,7 +26,7 @@ def run(path_to_original_images, path_to_original_labels,
     os.makedirs(path_to_validation_images, exist_ok=True)
     os.makedirs(path_to_validation_labels, exist_ok=True)
 
-    validation_labels = ['sub-verse041_dir-ax_seg-vert_msk.nii.gz', 'sub-verse042_dir-ax_seg-vert_msk.nii.gz', 'sub-verse043_dir-iso_seg-vert_msk.nii.gz', 'sub-verse044_dir-ax_seg-vert_msk.nii.gz', 'sub-verse045_dir-ax_seg-vert_msk.nii.gz', 'sub-verse046_dir-ax_seg-vert_msk.nii.gz']
+    validation_labels = ['sub-verse041_dir-ax_seg-vert_msk.nii.gz', 'sub-verse042_dir-ax_seg-vert_msk.nii.gz', 'sub-verse043_dir-ax_seg-vert_msk.nii.gz', 'sub-verse044_dir-ax_seg-vert_msk.nii.gz', 'sub-verse045_dir-ax_seg-vert_msk.nii.gz', 'sub-verse046_dir-ax_seg-vert_msk.nii.gz']
     validation_images = [vl.replace('_seg-vert_msk', '_ct') for vl in validation_labels]
 
     assert len(validation_images) == len(validation_labels), "Mismatch in sizes between validation images and labels"
