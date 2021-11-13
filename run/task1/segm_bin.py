@@ -88,4 +88,4 @@ if __name__ == "__main__":
         help="Specify the output folder path"
     )
     args = parser.parse_args()
-    run(args.path_image_in, args.path_mask_out, use_temp_net=True)
+    run(args.path_image_in, args.path_mask_out, use_temp_net=False)
