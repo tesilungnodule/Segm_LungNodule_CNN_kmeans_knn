@@ -4,7 +4,8 @@ import SimpleITK as sitk
 import json
 import medpy.metric as mm
 from tqdm import tqdm
-
+import sys
+print(sys.path.append("/content/Segm_LungNodule_CNN_kmeans_knn"))
 from config.paths import base_dataset_dir
 
 
