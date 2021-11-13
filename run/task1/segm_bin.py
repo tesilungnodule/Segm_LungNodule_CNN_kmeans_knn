@@ -2,6 +2,8 @@ import argparse
 import os
 import torch
 import torchio
+import sys
+print(sys.path.append("/content/Segm_LungNodule_CNN_kmeans_knn"))
 from config.config_semseg import SemSegMRIConfig
 from config.paths import logs_folder, test_prediction_folder, test_images_folder
 from run.utils import print_test, nii_load, nii_write
