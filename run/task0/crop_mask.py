@@ -88,6 +88,13 @@ def crop_image_folder(images_folder, labels_folder, images_folder_save, labels_f
         print("BBox = {}".format(bbox))
         zmin, ymin, xmin, zmax, ymax, xmax = bbox
         print("z = [{} - {}] | y = [{} - {}] | x = [{} - {}]".format(zmin, zmax, ymin, ymax, xmin, xmax))
+        cornice  = 5 
+        bbox[0]-=cornice
+        bbox[1]-=cornice
+        bbox[2]-=cornice
+        bbox[3]+=cornice
+        bbox[4]+=cornice
+        bbox[5]+=cornice
         modified_data = cut_image(msk_load, bbox)
         modified_data2 = cut_image(img_load, bbox)
         print("Before cut Image Size = {}".format(img_load.GetSize()))
