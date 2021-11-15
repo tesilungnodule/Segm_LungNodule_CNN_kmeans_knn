@@ -89,6 +89,7 @@ def crop_image_folder(images_folder, labels_folder, images_folder_save, labels_f
         zmin, ymin, xmin, zmax, ymax, xmax = bbox
         print("z = [{} - {}] | y = [{} - {}] | x = [{} - {}]".format(zmin, zmax, ymin, ymax, xmin, xmax))
         cornice  = 5 
+        bbox = list(bbox)
         bbox[0]-=cornice
         bbox[1]-=cornice
         bbox[2]-=cornice
