@@ -1,3 +1,6 @@
+import sys
+print(sys.path.append("/content/Segm_LungNodule_CNN_kmeans_knn"))
+
 from semseg.train import train_model, val_model
 from semseg.data_loader import QueueDataLoaderTraining, QueueDataLoaderValidation
 from run.utils import check_train_set, print_config, check_torch_loader, train_val_split_config
