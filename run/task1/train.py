@@ -103,7 +103,7 @@ if __name__ == "__main__":
         "-r",
         "--resumeTraining",
         default=False,
-        dest='resumeTraining', action='store_true',
+        dest='resumeTraining', type=str,
         help="Specity ")
 
     #parser.store_default(resumeTraining=False)
