@@ -102,10 +102,11 @@ if __name__ == "__main__":
     parser.add_argument(
         "-r",
         "--resumeTraining",
+        default=False,
         dest='resumeTraining', action='store_true',
         help="Specity ")
 
-    parser.store_defaults(resumeTraining=False)
+    #parser.store_default(resumeTraining=False)
 
     args = parser.parse_args()
     config.epochs = args.epochs
