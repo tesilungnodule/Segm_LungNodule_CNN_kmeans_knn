@@ -17,7 +17,7 @@ def train_model(net, optimizer, train_data, config, device=None, logs_folder=Non
     net = net.to(device)
     start_epoch = 0
     if (resumeTrainingFromNet):
-        net.net.load_state_dict(torch.load(os.path.join(logs_folder,resumeTrainingFromNet)))
+        net.load_state_dict(torch.load(os.path.join(logs_folder,resumeTrainingFromNet)))
         start_epoch = int(resumeTrainingFromNet[12:-4])
     # train loop
     for epoch in range(start_epoch,config.epochs):
