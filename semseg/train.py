@@ -11,12 +11,16 @@ from semseg.utils import multi_dice_coeff, multi_hausdorff_distance, multi_assd_
 LEARNING_RATE_REDUCTION_FACTOR = 2
 
 
-def train_model(net, optimizer, train_data, config, device=None, logs_folder=None):
+def train_model(net, optimizer, train_data, config, device=None, logs_folder=None, resumeTrainingFromNet= None):
 
     print('Start training...')
     net = net.to(device)
+    start_epoch = 0
+    if (resumeTrainingFromNet):
+        net.net.load_state_dict(torch.load(os.path.join(logs_folder,resumeTrainingFromNet)))
+        start_epoch = int(resumeTrainingFromNet[12:-4])
     # train loop
-    for epoch in range(config.epochs):
+    for epoch in range(start_epoch,config.epochs):
 
         epoch_start_time = time.time()
         running_loss = 0.0

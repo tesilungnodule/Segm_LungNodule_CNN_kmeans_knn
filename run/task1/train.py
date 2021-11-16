@@ -1,3 +1,9 @@
+from semseg.train import train_model, val_model
+from semseg.data_loader import QueueDataLoaderTraining, QueueDataLoaderValidation
+from run.utils import check_train_set, print_config, check_torch_loader, train_val_split_config
+from config.paths import logs_folder
+from models.vnet3d import VNet3D
+from config.config_semseg import SemSegMRIConfig
 import argparse
 import os
 import torch
@@ -6,19 +12,12 @@ import torch.optim as optim
 import sys
 print(sys.path.append("/content/Segm_LungNodule_CNN_kmeans_knn"))
 
-from config.config_semseg import SemSegMRIConfig
-from models.vnet3d import VNet3D
-from config.paths import logs_folder
-from run.utils import check_train_set, print_config, check_torch_loader, train_val_split_config
-from semseg.data_loader import QueueDataLoaderTraining, QueueDataLoaderValidation
-from semseg.train import train_model, val_model
-
 
 def get_net(config):
     return VNet3D(num_outs=config.num_outs, channels=config.num_channels)
 
 
-def run(config):
+def run(config, resumeTraining):
     ##########################
     # Check training set
     ##########################
@@ -44,14 +43,14 @@ def run(config):
 
     ##########################
     # Training 90%
-    ##########################z
+    # z
     net = get_net(config_val)
     config_val.lr = 0.0001
     # config_val.lr = 0.005
     optimizer = optim.Adam(net.parameters(), lr=config_val.lr)
     train_data_loader_3D = QueueDataLoaderTraining(config_val)
     net = train_model(net, optimizer, train_data_loader_3D,
-                      config_val, device=cuda_dev, logs_folder=logs_folder)
+                      config_val, device=cuda_dev, logs_folder=logs_folder,resumeTrainingFromNet=resumeTraining)
 
     torch.save(net, os.path.join(logs_folder, "model.pt"))
 
@@ -66,7 +65,8 @@ def run(config):
 if __name__ == "__main__":
     config = SemSegMRIConfig()
 
-    parser = argparse.ArgumentParser(description="Run Training for Vertebral Column Segmentation")
+    parser = argparse.ArgumentParser(
+        description="Run Training for Vertebral Column Segmentation")
     parser.add_argument(
         "-e",
         "--epochs",
@@ -96,6 +96,13 @@ if __name__ == "__main__":
         default=config.lr, type=float,
         help="Learning Rate"
     )
+    parser.add_argument(
+        "-r",
+        "--resumeTraining",
+        dest='resumeTraining', action='store_true',
+        help="Specity ")
+
+    parser.store_defaults(resumeTraining=False)
 
     args = parser.parse_args()
     config.epochs = args.epochs
@@ -104,4 +111,4 @@ if __name__ == "__main__":
     config.num_workers = args.workers
     config.lr = args.lr
 
-    run(config)
+    run(config, resumeTraining=args.resumeTraining)
