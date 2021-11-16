@@ -10,7 +10,7 @@ from run.utils import print_test, nii_load, nii_write
 from models.vnet3d import VNet3D
 
 
-def run(path_image_in, path_mask_out, use_temp_net=False, temp_epoch=100):
+def run(path_image_in, path_mask_out, use_temp_net=False, temp_epoch=600):
     ##########################
     # Config
     ##########################
@@ -88,4 +88,4 @@ if __name__ == "__main__":
         help="Specify the output folder path"
     )
     args = parser.parse_args()
-    run(args.path_image_in, args.path_mask_out, use_temp_net=False)
+    run(args.path_image_in, args.path_mask_out, use_temp_net=True)
