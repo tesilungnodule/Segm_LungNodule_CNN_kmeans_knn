@@ -54,22 +54,23 @@ def run(path_image_in, path_mask_out, use_temp_net=False, temp_epoch=600):
         
         if(tempsub_shape[1]>63 & tempsub_shape[2]>63 & tempsub_shape[3]>63):
             grid_sampler = torchio.inference.GridSampler(
-            torchio.Subject(t1=torchio.Image(type=torchio.INTENSITY, path=train_image_path)),
+            torchio.Subject(t1=torchio.Image(type=torchio.INTENSITY, path=train_image_path)),            
             64,
             4,
-        )
+            )
         elif(31<tempsub_shape[1]<64 | 31<tempsub_shape[2]<64 | 31<tempsub_shape[3]<64):
             grid_sampler = torchio.inference.GridSampler(
             torchio.Subject(t1=torchio.Image(type=torchio.INTENSITY, path=train_image_path)),
             32,
             4,
-        )
+            )
         elif(15<tempsub_shape[1]<32 | 15<tempsub_shape[2]<32 | 15<tempsub_shape[3]<32):
             grid_sampler = torchio.inference.GridSampler(
             torchio.Subject(t1=torchio.Image(type=torchio.INTENSITY, path=train_image_path)),
             16,
             4,
-        )
+            )
+            print(tempsub_shape[1])
         else: 
             print("Image: {} is not compliant, it has been skipped".format(test_image))
             continue
