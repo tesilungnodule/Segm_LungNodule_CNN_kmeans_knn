@@ -51,19 +51,19 @@ def run(path_image_in, path_mask_out, use_temp_net=False, temp_epoch=600):
 
         tempsub = torchio.Subject(t1=torchio.Image(type=torchio.INTENSITY, path=train_image_path))
         tempsub_shape = tempsub.shape
-        if(tempsub_shape[0]>63 | tempsub_shape[1]>63 | tempsub_shape[2]>63):
+        if(tempsub_shape[0]>63 & tempsub_shape[1]>63 & tempsub_shape[2]>63):
             grid_sampler = torchio.inference.GridSampler(
             torchio.Subject(t1=torchio.Image(type=torchio.INTENSITY, path=train_image_path)),
             64,
             4,
         )
-        elif(16<tempsub_shape[0]<33 | 16<tempsub_shape[1]<33 | 16<tempsub_shape[2]<33):
+        elif(31<tempsub_shape[0]<64 | 31<tempsub_shape[1]<64 | 31<tempsub_shape[2]<64):
             grid_sampler = torchio.inference.GridSampler(
             torchio.Subject(t1=torchio.Image(type=torchio.INTENSITY, path=train_image_path)),
             32,
             4,
         )
-        elif(tempsub_shape[0]<17 | tempsub_shape[1]<17 | tempsub_shape[2]<17):
+        elif(15<tempsub_shape[0]<32 | 15<tempsub_shape[1]<32 | 15<tempsub_shape[2]<32):
             grid_sampler = torchio.inference.GridSampler(
             torchio.Subject(t1=torchio.Image(type=torchio.INTENSITY, path=train_image_path)),
             16,
