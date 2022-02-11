@@ -48,11 +48,31 @@ def run(path_image_in, path_mask_out, use_temp_net=False, temp_epoch=600):
 
         train_image_path = os.path.join(path_image_in, test_image)
         train_image_np, affine = nii_load(train_image_path)
-        grid_sampler = torchio.inference.GridSampler(
+
+        tempsub = torchio.Subject(t1=torchio.Image(type=torchio.INTENSITY, path=train_image_path))
+        tempsub_shape = tempsub.shape
+        if(tempsub_shape[0]>63 | tempsub_shape[1]>63 | tempsub_shape[2]>63):
+            grid_sampler = torchio.inference.GridSampler(
+            torchio.Subject(t1=torchio.Image(type=torchio.INTENSITY, path=train_image_path)),
+            64,
+            4,
+        )
+        elif(16<tempsub_shape[0]<33 | 16<tempsub_shape[1]<33 | 16<tempsub_shape[2]<33):
+            grid_sampler = torchio.inference.GridSampler(
+            torchio.Subject(t1=torchio.Image(type=torchio.INTENSITY, path=train_image_path)),
+            32,
+            4,
+        )
+        elif(tempsub_shape[0]<17 | tempsub_shape[1]<17 | tempsub_shape[2]<17):
+            grid_sampler = torchio.inference.GridSampler(
             torchio.Subject(t1=torchio.Image(type=torchio.INTENSITY, path=train_image_path)),
             16,
             4,
         )
+        else:
+			print("Image: {} is not compliant, it has been skipped".format(test_image))
+            continue
+            
         patch_loader = torch.utils.data.DataLoader(grid_sampler, batch_size=config.batch_size)
         aggregator = torchio.inference.GridAggregator(grid_sampler)
 
