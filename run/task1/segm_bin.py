@@ -51,6 +51,7 @@ def run(path_image_in, path_mask_out, use_temp_net=False, temp_epoch=600):
 
         tempsub = torchio.Subject(t1=torchio.Image(type=torchio.INTENSITY, path=train_image_path))
         tempsub_shape = tempsub.shape
+        print(tempsub_shape)
         if(tempsub_shape[0]>63 & tempsub_shape[1]>63 & tempsub_shape[2]>63):
             grid_sampler = torchio.inference.GridSampler(
             torchio.Subject(t1=torchio.Image(type=torchio.INTENSITY, path=train_image_path)),
