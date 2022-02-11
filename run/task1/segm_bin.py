@@ -69,8 +69,7 @@ def run(path_image_in, path_mask_out, use_temp_net=False, temp_epoch=600):
             16,
             4,
         )
-        else:
-			print("Image: {} is not compliant, it has been skipped".format(test_image))
+        else: print("Image: {} is not compliant, it has been skipped".format(test_image))
             continue
             
         patch_loader = torch.utils.data.DataLoader(grid_sampler, batch_size=config.batch_size)
