@@ -50,7 +50,7 @@ def run(path_image_in, path_mask_out, use_temp_net=False, temp_epoch=600):
         train_image_np, affine = nii_load(train_image_path)
         grid_sampler = torchio.inference.GridSampler(
             torchio.Subject(t1=torchio.Image(type=torchio.INTENSITY, path=train_image_path)),
-            16,
+            64,
             4,
         )
         patch_loader = torch.utils.data.DataLoader(grid_sampler, batch_size=config.batch_size)
