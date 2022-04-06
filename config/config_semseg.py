@@ -15,7 +15,7 @@ class SemSegMRIConfig(SemSegConfig):
     num_workers = 8
     lr = 0.0001
     # lr = 0.005
-    epochs = 1000
+    epochs = 1500
     # epochs = 500
     low_lr_epoch = epochs // 5
     val_epochs = epochs // 5
